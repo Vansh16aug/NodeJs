@@ -41,6 +41,39 @@
         console.log(Dict.vansh);
         console.log(Dict.Javascript);
 
+
+        //6.
+        var a=1;
+        let b=10;
+        const c=100;
+
+        function Block(){
+            var a=2;
+            let b=20;
+            const c=200;
+            console.log(a);
+            console.log(b);
+            console.log(c);
+        }
+        console.log('Global Variables');
+        console.log(a);
+        console.log(b);
+        console.log(c);
+        console.log('Local Variables');
+        Block();
+
+        //7.
+        var n=10;
+        var m='10';
+        if(n===m){
+            console.log('same values and data type also');
+        }
+        else if(n==m){
+            console.log('same values only');
+        }
+        else{
+            console.log('diff');
+        }
     </script>
 </head>
 <body>
