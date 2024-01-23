@@ -57,4 +57,3 @@
 // console.log(b.includes("lemon"));
 
 
-// 10.
