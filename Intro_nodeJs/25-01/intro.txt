@@ -1,0 +1,4 @@
+// NodeJs is an open source platform to provide a run time enviroment fpr javascript code outside the browser
+
+// it uses v8 chrome's javascript engine
+
