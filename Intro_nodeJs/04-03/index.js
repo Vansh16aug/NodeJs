@@ -9,6 +9,7 @@ http.createServer((req,res)=>{
         res.end(data);
         console.log("Data Given to port 3000");
         console.log("Data Given to port 3000");
+        console.log("Data Given to port 3000");
     });
 
 }).listen(3000);
