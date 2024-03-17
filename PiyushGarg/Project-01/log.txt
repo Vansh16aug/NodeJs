@@ -20,3 +20,7 @@
 1710678684465:::1 POST: /api/users
 1710678697548:::1 POST: /api/users
 1710678831596:::1 GET: /api/users/113213
+1710680112470:::1 GET: /users
+1710680128698:::1 GET: /api/users
+1710680181753:::1 POST: /api/users
+1710680370056:::1 POST: /api/users
