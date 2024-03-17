@@ -1,10 +1,32 @@
 const express = require("express");
 const fs = require("fs");
-const users =require("./MOCK_DATA.json")
+const users =require("./MOCK_DATA.json");
+const { data } = require("jquery");
 const app = express();
 const PORT = 3000;
 
+//MIDDLEWARE
+
+// -> anything defined inside middlewares stays through out the program
+
 app.use(express.urlencoded({extended:false}));
+
+app.use((req,res,next)=>{
+    console.log("hello from middleWare1");
+    next();
+});
+
+//all the get request are getting stored
+app.use((req,res,next)=>{
+    fs.appendFile("log.txt",`\n${Date.now()}:${req.ip} ${req.method}: ${req.path}`,(err,data)=>{
+        next();
+    })
+});
+
+app.use((req,res,next)=>{
+    console.log("hello from middleWare2");
+    next();
+});
 
 app.get("/users",(req,res)=>{
     const html =`<ul>
@@ -15,6 +37,8 @@ app.get("/users",(req,res)=>{
 
 //REST API
 app.get('/api/users',(req,res)=>{
+    res.setHeader('X-MyName','Vansh Kumar');  //Custom Header should start with X
+    console.log(req.headers);
     return res.json(users);
 });
 
