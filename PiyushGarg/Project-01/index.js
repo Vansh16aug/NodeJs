@@ -93,73 +93,23 @@ app.post("/api/users",async (req,res)=>{
 });
 
 app.route('/api/users/:id')
-.get((req,res)=>{
-    const id =Number(req.params.id);
-    const user = users.find(user=>user.id == id);
+.get(async(req,res)=>{
+    const user =await User.findById(req.params.id);
 
     if(!user) return res.status(404).json({ error: "user not found"});
 
     return res.json(user);
 })
-.patch((req,res)=>{
-    //edit the user
-    const id = Number(req.params.id);
-    // user contains the existing data of user
-    const user = users.find(user=>user.id == id);
+.patch(async(req,res)=>{
+    await User.findByIdAndUpdate(req.params.id, req.body);
     
-    // Update the user details
-
-    // body contains whats new from request
-    const body = req.body;
-    user.first_name = body.first_name || user.first_name;
-    user.last_name = body.last_name || user.last_name;
-    user.email = body.email || user.email;
-    user.gender = body.gender || user.gender;
-    
-    fs.writeFile('./MOCK_DATA.json',JSON.stringify(users),(err,data) => {
-        if(err){
-            return err;
-        }
-        return res.json({status:"success"});
-    });
+    return res.json({status:"Success"});
 })
-.delete((req,res)=>{
+.delete(async(req,res)=>{
     //delete the user
-    const id = Number(req.params.id);
-    const user = users.find(user=>user.id==id);
-
-    const body=req.body;
-    users.splice(users.indexOf(user), 1);
-    fs.writeFile('./MOCK_DATA.json', JSON.stringify(users), (err, data) => {
-        if (err) {
-            return err;
-        }
-        return res.json({ status: "success" });
-    });
+    await User.findByIdAndDelete(req.params.id);
+    return res.json({status :"Success"});
 });
-
-
-
-// we can see these 3 are using same route so best practise is to use router
-
-// app.get('/api/users/:id',(req,res)=>{
-//     const id =Number(req.params.id);
-//     const user = users.find(user=>user.id == id);
-//     return res.json(user);
-// });
-
-// app.patch("/api/users/:id",(req,res)=>{
-//     //edit the user
-//     return res.json({status:"pending"});
-// })
-
-// app.delete("/api/users/:id",(req,res)=>{
-//     //delete the user
-//     return res.json({status:"pending"});
-// })
-
-
-
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
