@@ -24,3 +24,16 @@
 1710680128698:::1 GET: /api/users
 1710680181753:::1 POST: /api/users
 1710680370056:::1 POST: /api/users
+1710680560769:::1 GET: /api/users/highLightTitle.png
+1710680562523:::1 GET: /api/users
+1710680563125:::1 GET: /api/highLightTitle.png
+1710680573598:::1 GET: /users
+1710680628631:::1 GET: /users
+1710680778136:::1 GET: /users
+1710680779711:::1 GET: /highLightTitle.png
+1710680863318:::1 POST: /api/users
+1710680866525:::1 GET: /users
+1710680867168:::1 GET: /highLightTitle.png
+1710680925882:::1 GET: /api/users
+1710680927664:::1 GET: /api/highLightTitle.png
+1710680946252:::1 GET: /api/users

@@ -1,6 +1,5 @@
 const express = require("express");
 const fs = require("fs");
-const users =require("./MOCK_DATA.json");
 const mongoose =require("mongoose");
 const { timeStamp } = require("console");
 const app = express();
@@ -9,6 +8,7 @@ const PORT = 3000;
 mongoose.connect("mongodb://localhost:27017/learing-express")
 .then(()=> console.log("MongoDB connected"))
 .catch((err)=> console.log("Mongo error",err));
+
 
 // Schema
 const userSchema =new mongoose.Schema({
@@ -31,7 +31,8 @@ const userSchema =new mongoose.Schema({
     },
 
 },{timestamps:true});
-
+//Model
+const User = mongoose.model("user",userSchema);
 
 //MIDDLEWARE
 // -> anything defined inside middlewares stays through out the program
@@ -52,18 +53,18 @@ app.use((req,res,next)=>{
 });
 
 
-app.get("/users",(req,res)=>{
+app.get("/users",async(req,res)=>{
+    const allDbUsers = await User.find({})
     const html =`<ul>
-    ${users.map(user=>`<li>${user.first_name}</li>`).join('')}
+    ${allDbUsers.map((user)=>`<li>${user.first_name} ${user.email}</li>`).join('')}
     </ul>`;
     res.send(html);
 });
 
 //REST API
-app.get('/api/users',(req,res)=>{
-    res.setHeader('X-MyName','Vansh Kumar');  //Custom Header should start with X
-    console.log(req.headers);
-    return res.json(users);
+app.get('/api/users',async(req,res)=>{
+    const allDbUsers = await User.find({})
+    return res.json(allDbUsers);
 });
 
 //POST
